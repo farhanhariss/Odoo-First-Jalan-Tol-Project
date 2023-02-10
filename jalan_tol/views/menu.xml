@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem 
+    id="menu_jalan_tol_root" 
+    name="Jalan Tol" 
+    sequence="10"
+    />
+
+    <menuitem
+    id="daftar_jalan_tol"
+    name="Daftar Jalan Tol"
+    parent="menu_jalan_tol_root"
+    action="form_jalan_tol"
+    sequence="1"
+    />
+
+</odoo>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+
+
+        <record id="view_jalan_tol_kanban" model="ir.ui.view">
+            <field name="name">jalan.tol.kanban</field>
+            <field name="model">jalan.tol</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                <!-- #untuk menampilkan data di kanban nama field harus sama kaya yang didefinisiin di daftar_sekolah_form_siswa.py -->
+                <!-- #kanban ->  -->
+                    <field name="name_jalan"/>
+                    <field name="lokasi"/>
+                    <field name="panjang"/>
+                    <field name="lebar"/>
+                    <field name="status"/>
+                    <field name="kontraktor"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            Nama: <field name="name_jalan"/>
+                                        </li>
+                                        <li>
+                                            Lokasi: <field name="lokasi"/>
+                                        </li>
+                                        <li>
+                                            Panjang: <field name="panjang"/>
+                                        </li>
+                                        <li>
+                                            Lebar: <field name="lebar"/>
+                                        </li>
+                                        <li>
+                                            Lebar: <field name="status"/>
+                                        </li>
+                                        <li>
+                                            Lebar: <field name="kontraktor"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban> 
+            </field>
+        </record>
+
+        <record id="view_jalan_tol_tree" model="ir.ui.view">
+            <field name="name">jalan.tol.tree</field>
+            <field name="model">jalan.tol</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name_jalan"/>
+                    <field name="lokasi"/>
+                    <field name="panjang"/>
+                    <field name="lebar"/>
+                    <field name="status"/>
+                    <field name="kontraktor"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_jalan_tol_search" model="ir.ui.view">
+            <field name="name">jalan.tol.search</field>
+            <field name="model">jalan.tol</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name_jalan" string="Nama Jalan" filter_domain="['|',('name_jalan','ilike', self),('lokasi', 'ilike',self)]"/>
+                    <field name="lokasi"/>
+                    <field name="status"/>
+                    <field name="kontraktor"/>
+                    <filter name="filter_bisa_digunakan" string="Bisa digunakan" domain="[('status', '=', 'bisa_digunakan')]"/>
+                    <filter name="filter_tidak_bisa_digunakan" string="Tidak bisa digunakan" domain="[('status', '=', 'tidak_bisa_digunakan')]"/>
+                    <filter name="filter_perlu_diperbaiki" string="Perlu diperbaiki" domain="[('status', '=', 'perlu_diperbaiki')]"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="view_jalan_tol_form" model="ir.ui.view">
+            <field name="name">jalan.tol.form</field>
+            <field name="model">jalan.tol</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name_jalan"/>
+                                <field name="lokasi"/>
+                            </group>
+
+                            <group>
+                                <field name="panjang"/>
+                                <field name="lebar"/>
+                            </group>
+
+                            <group>
+                                <field name="status"/>
+                                <field name="kontraktor"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <!-- chatter -->
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="form_jalan_tol" model="ir.actions.act_window">
+            <field name="name">Daftar Jalan Tol</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">jalan.tol</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Tambahkan jalan tol baru dengan mengklik tombol "Buat".
+                </p>
+            </field>
+        </record>
+    </odoo>
